@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+:root{
+    --darkcolor: #111827;
+    --middark:#1F2937;
+    --litedark: #353F4F;
+    --hover:#4c586b;
+    --fontcolor:#E9EBEE;
+    --viewcolor:#4ee2bd;
+    --inactive:#ffffff96;
+    --font: 'Hind Siliguri', sans-serif;
+}
+*:focus {outline:none !important}
+img{
+user-select: none;
+-moz-user-select: none;
+-webkit-user-drag: none;
+-webkit-user-select: none;
+-ms-user-select: none;
+user-drag: none; 
+
+}
+
+::-webkit-scrollbar {
+    width: .5rem;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--litedark);
+  }
+  body::-webkit-scrollbar-thumb {
+    background: var(--viewcolor);
+    height: 1rem;
+    border-radius: 10px;
+    height:  5px !important;
+
+  }
+
+body{
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    color: var(--fontcolor);
+    background: var(--darkcolor) !important;
+}
+.roundbtn{
+    color: var(--fontcolor);
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .4rem .4rem;
+    border-radius: 1rem;
+    background: var(--litedark);
+    font-size: 1.2rem;
+}
+.roundbtn:hover{
+    text-decoration: none;
+    background: var(--hover);
+    transition: all ease .4s;
+}
+
+.roundbtn:focus{
+    text-decoration: none;
+    background: var(--hover);
+    transition: all ease .4s;
+    color: var(--viewcolor) !important;
+}
+a:hover{
+    text-decoration: none;
+}
+.mylink a{
+    background: var(--litedark);
+}
+.mylink a:hover{
+    text-decoration: none;
+    background: var(--hover);
+    transition: all ease .4s;
+}
+
+
+input {
+    background: var(--litedark);
+    border-color: var(--hover);
+    color: var(--fontcolor);
+    border: 2px solid #535967;
+    outline: none;
+    border-radius: .3rem;
+    padding: .2rem .6rem;
+}
+input:focus{
+border:2px solid var(--viewcolor) ;
+outline-offset: 0 ;
+outline: none ;
+transition: all ease-in-out .4s ;
+}
+
+
+button{
+    background: var(--litedark);
+}
+
+button:hover{
+    text-decoration: none;
+    background: var(--hover);
+    transition: all ease .4s;
+}
+
+button:focus{
+    text-decoration: none;
+    background: var(--hover);
+    transition: all ease .4s;
+}
+
