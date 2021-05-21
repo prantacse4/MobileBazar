@@ -25,7 +25,7 @@ def addproduct(request):
         myform = FormProduct(request.POST, request.FILES)
         if myform.is_valid():
             myform.save(commit=True)
-            messages.success(request, 'Your profile was updated.')
+            messages.success(request, 'Product Added Successfully')
         
     diction = {'myform':myform, 'brand':brand}
     return render(request, 'Shop/panel/addproduct.html', context = diction)
