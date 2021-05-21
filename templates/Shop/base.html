@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="{% static 'Bootstrap/bootstrap4.5.css' %}">
+<link rel="icon" href="{% static 'css/base.css' %}">
+<link rel="icon" href="{% static 'image/icon.jpg' %}" type="image/png" >
+
+{% block extracss %}
+    
+{% endblock extracss %}
+    
+<title>
+{% block title %}
+    
+{% endblock title %}
+    </title>
+</head>
+<body>
+
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"><b>MobileBazar</b></a>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item 
+            {% block homeactive %}
+                
+            {% endblock homeactive %}
+                ">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item 
+            {% block brandsactive %}
+                
+            {% endblock brandsactive %}
+                ">
+              <a class="nav-link" href="#">Brands</a>
+            </li>
+            <li class="nav-item 
+            {% block unofficialactive %}
+                
+            {% endblock unofficialactive %}
+                ">
+              <a class="nav-link" href="#">Unofficial</a>
+            </li>
+            <li class="nav-item 
+            {% block contactusactive %}
+                
+            {% endblock contactusactive %}
+                ">
+              <a class="nav-link" href="#">Contact Us</a>
+            </li>
+            <li class="nav-item 
+            {% block cartactive %}
+                
+            {% endblock cartactive %}
+                ">
+              <a class="nav-link" href="#">Cart</a>
+            </li>
+            <li class="nav-item 
+            {% block loginactive %}
+                
+            {% endblock loginactive %}
+                ">
+              <a class="nav-link" href="#">Login</a>
+            </li>
+            <li class="nav-item dropdown 
+            {% block profileactive %}
+                
+            {% endblock profileactive %}
+                ">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Name
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Logout</a>
+              </div>
+            </li>
+            
+          </ul>
+          
+        </div>
+      </nav>
+
+<br><br>
+
+{% block main %}
+    
+{% endblock main %}
+    
+
+      
+<script src="{% static 'Bootstrap/jquery3.5.1.js' %}"></script>
+<script src="{% static 'Bootstrap/bootstrap4.5.js' %}"></script>
+
+
+    
+<script>
+    $(document).ready(function() {
+
+    });
+</script>
+{% block extrajs %}
+    
+{% endblock extrajs %}
+</body>
+</html>

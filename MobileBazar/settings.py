@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'Shop',
+    'django_cleanup',
 
 ]
 
