@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render, HttpResponseRedirect
 from .models import *
-from .forms import FormProduct, FormCart
+from .forms import FormProduct, FormCart, FormEditQty, FormCheckout, FormOrdered
 from django.db.models import Q
 from django.shortcuts import redirect
 from  django.contrib import messages
@@ -36,10 +36,37 @@ def addproduct(request):
 
 def cart(request):
     carts = Cart.objects.all()
-    # total = Cart.objects.aggregate(Sum('price'))
-    total = sum(carts.values_list('price', flat=True))
+    total = 0
+    for cart in carts:
+        total = total+cart.quantity*cart.price
     diction = {'carts':carts, 'total':total}
     return render(request, 'Shop/cart.html', context = diction)
+
+
+def checkout(request):
+    carts = Cart.objects.all()
+    cartcount =carts.count()
+    if(cartcount==0):
+        return redirect('cart')
+    if request.method=="POST":
+        myform = FormCheckout(request.POST)
+        user = request.user
+        location = request.POST['location']
+        phone = request.POST['phone']
+        addData = Checkout(user=request.user, location=location, phone=phone)
+        addData.save()
+        obj = Checkout.objects.latest('id')
+        for cart in carts:
+            add = Ordered(checkout=obj, product=cart.product, price=cart.price, quantity=cart.quantity)
+            add.save()
+        Cart.objects.all().delete()
+        messages.success(request, 'Checkout Done')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+   
+    else:
+        myform = FormCheckout()
+    diction = {'myform':myform}
+    return render(request, 'Shop/checkout.html', context = diction)
 
 
 
@@ -61,4 +88,17 @@ def deletethiscart(request, id):
         delete_id.delete()
         messages.success(request, 'Item Deleted')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def editqtycart(request, id):
+    if request.method=="POST":
+        cartData = Cart.objects.get(pk=id)
+        myform = FormEditQty(request.POST, instance = cartData)
+        if myform.is_valid():
+            quantity = myform.cleaned_data['quantity']
+            if 0<quantity:
+                myform.save(commit=True)
+                messages.success(request, 'Qty Updated')
+            else:
+                messages.success(request, 'Qty Can no be Updated')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

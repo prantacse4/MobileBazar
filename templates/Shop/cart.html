@@ -17,7 +17,12 @@
     <hr>
     <h4><b>{{ cart.product.name }}</b></h4>
     <h4>Price: {{ cart.product.price }}</h4>
-    <h4>Qty : {{ cart.quantity }}</h4>
+    <form action="{% url 'editqtycart' cart.id %}" method="post">
+      {% csrf_token %}
+      <input type="number" name="quantity" required value="{{ cart.quantity }}" class="form-control">
+      <button class="btn btn-warning">Edit</button>
+    </form>
+
     <form action="{% url 'deletethiscart' cart.id %}" method="post">
         {% csrf_token %}
         <button class="btn btn-danger">Remove</button>

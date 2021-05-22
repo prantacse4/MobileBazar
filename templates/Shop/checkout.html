@@ -1,0 +1,67 @@
+{% extends 'Shop/base.html' %}
+
+{% block title %}
+  Checkout
+{% endblock title %}
+  
+
+{% block extracss %}
+  
+{% endblock extracss %}
+  
+
+{% block main %}
+
+<br>
+<div class="container">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %} 
+    </ul>
+    {% endif %}
+
+    {% if myform.errors %}
+    {% for field in myform %}
+        {% for error in field.errors %}
+            
+            {% if "Name" == field.label %}
+            <div class="alert alert-danger">
+                <strong>{{ field.label }} -> {{ error|escape }}</strong>
+            </div>
+            {% endif %}
+                
+            
+                
+        {% endfor %}
+    {% endfor %}
+    {% for error in myform.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %} 
+{% endif %}
+    <div class="card bg-dark">
+        <div class="card-header d-flex flex-row justify-content-between"><h2>Checkout</h2><a href="{% url 'cart' %}" class="btn btn-outline-info">Back to Cart</a></div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <label class="form-control-label mt-3">Address</label>
+                <textarea name="location" class="form-control bg-dark text-white" placeholder="Write you address"  rows="3"></textarea>
+                <label class="form-control-label mt-3">Phone</label>
+                <input type="text" class="form-control bg-dark text-white" name="phone">
+                <button class="btn btn-success mt-3">Checkout</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock main %}
+
+
+{% block extrajs %}
+  
+{% endblock extrajs %}
+  

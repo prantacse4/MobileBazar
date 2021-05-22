@@ -39,4 +39,11 @@ class Checkout(models.Model):
     phone = models.CharField(max_length=50)
     placed =models.BooleanField(default=False)
     shipped =models.BooleanField(default=False)
+    # def __str__(self):
+    #     return self.user.id
 
+class Ordered(models.Model):
+    checkout = models.ForeignKey(Checkout, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    price = models.IntegerField()
+    quantity = models.IntegerField()
