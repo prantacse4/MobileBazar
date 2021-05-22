@@ -50,7 +50,7 @@ def addtocart(request, id):
         price = product.price
         adddata = Cart(user=request.user, product=product,price=price, quantity=1)
         adddata.save()
-        messages.success(request, 'Product added')
+        messages.success(request, 'Product added to the cart')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
