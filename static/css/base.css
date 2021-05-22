@@ -33,7 +33,22 @@ user-drag: none;
     height:  5px !important;
 
   }
+ul{
+    list-style: none;
+}
+ul>li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
 
+img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
 body{
     margin: 0;
     padding: 0;

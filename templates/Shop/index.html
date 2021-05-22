@@ -1,5 +1,5 @@
 {% extends 'Shop/base.html' %}
-
+{% load static %}
 {% block title %}
   Home
 {% endblock title %}
@@ -11,6 +11,41 @@
   
 
 {% block main %}
+
+<div class="container">
+  
+
+  <div class="row">
+  {% for product in products %}
+
+    <div class="col-md-4">
+        
+        <div class="p-2">
+          {% if product.product_photo %}
+          <img src="{{ product.product_photo.url }}" alt="">
+        {% else %}
+        <img src="{% static 'image/icon.jpg' %}" alt="">
+
+        {% endif %}
+        <h4>Name: {{ product.name }}</h4>
+        <form action="{% url 'addtocart' product.id %}" method="post">
+        {% csrf_token %}
+        <button class="roundbtn">Add to Cart</button>
+        </form>
+        <span><a href="#" class="btn btn-primary ">View Product</a></span>
+
+        </div>
+
+    </div>
+  {% endfor %}
+
+  </div>
+    
+
+
+
+    
+</div>
 
 {% endblock main %}
 

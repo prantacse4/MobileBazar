@@ -28,6 +28,7 @@ class Product(models.Model):
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, unique=False)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    price = models.IntegerField()
     quantity = models.IntegerField()
     def __str__(self):
         return self.product.name

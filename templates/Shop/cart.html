@@ -1,0 +1,36 @@
+{% extends 'Shop/base.html' %}
+{% load static %}
+{% block title %}
+  Cart
+{% endblock title %}
+  
+
+{% block extracss %}
+  
+{% endblock extracss %}
+  
+
+{% block main %}
+<div class="container">
+    
+    {% for cart in carts %}
+    <hr>
+    <h4><b>{{ cart.product.name }}</b></h4>
+    <h4>Price: {{ cart.product.price }}</h4>
+    <h4>Qty : {{ cart.quantity }}</h4>
+    <form action="{% url 'deletethiscart' cart.id %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-danger">Remove</button>
+    </form>
+    <hr>    
+    {% endfor %}
+    <h1><b>Total: {{ total }}</b></h1>
+        
+</div>
+{% endblock main %}
+
+
+{% block extrajs %}
+  
+{% endblock extrajs %}
+  

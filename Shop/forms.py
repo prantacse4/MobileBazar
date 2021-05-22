@@ -8,3 +8,9 @@ class FormProduct(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'code', 'stock', 'price', 'brand', 'network', 'display_details', 'camera_details', 'memory_details', 'battery_details' , 'product_photo']
+
+
+class FormCart(forms.ModelForm):
+    class Meta:
+        model = Cart
+        fields = ['user', 'product', 'price', 'quantity']
