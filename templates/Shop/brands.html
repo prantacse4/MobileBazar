@@ -19,7 +19,18 @@
 
 
 {% block main %}
-    <h1>Brand</h1>
+    <br>
+    <div class="container">
+      
+      {% for brand in brands %}
+      <a href="{% url 'brandview' brand.id %}">
+        <div class="card card-body bg-dark text-white btn m-4 p-3">
+          <h1 class="text-center">{{ brand.brand }}</h1>
+        </div>
+      </a>
+      {% endfor %}
+        
+    </div>
 {% endblock main %}
 
 

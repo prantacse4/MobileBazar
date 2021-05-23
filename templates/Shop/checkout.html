@@ -8,7 +8,15 @@
 {% block extracss %}
   
 {% endblock extracss %}
-  
+
+
+{% block cart %}
+{% if cart != 0 %}
+<span class="badge badge-primary">{{ cart }}</span>
+{% endif %}
+{% endblock cart %}
+
+
 
 {% block main %}
 

@@ -18,8 +18,8 @@ class CartAdmin(admin.ModelAdmin):
 
 @admin.register(Checkout)
 class CheckoutAdmin(admin.ModelAdmin):
-    list_display = ('user', 'location', 'phone', 'placed', 'shipped')
+    list_display = ('user', 'location', 'total', 'phone', 'placed', 'shipped')
 
 @admin.register(Ordered)
 class OrderedAdmin(admin.ModelAdmin):
-    list_display = ('id', 'checkout', 'product', 'product', 'quantity')
+    list_display = ('id', 'checkout', 'product', 'price', 'quantity')

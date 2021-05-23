@@ -111,6 +111,9 @@ def editqtycart(request, id):
 
 def mycheckout(request):
     checkouts = Checkout.objects.all().order_by('id')
+    checkoutscount =checkouts.count()
+    if(checkoutscount==0):
+        return redirect('cart')
     orders = Ordered.objects.all().order_by('id')
     diction ={'checkouts':checkouts, 'orders':orders}
     return render(request, 'Shop/mycheckout.html', context=diction)
@@ -124,10 +127,17 @@ def brands(request):
 
 
 def brandview(request,id):
-    brands = Brand.objects.get(pk=id)
+    brand = Brand.objects.get(pk=id)
+    products = Product.objects.filter(brand=brand)
     cart =Cart.objects.all().count()
-    diction = {'brands':brands, 'cart':cart}
+    diction = {'brand':brand, 'products':products, 'cart':cart}
     return render(request, 'Shop/brandview.html', context = diction)
+
+def productview(request,id):
+    product = Product.objects.get(pk=id)
+    cart =Cart.objects.all().count()
+    diction = {'product':product, 'cart':cart}
+    return render(request, 'Shop/productview.html', context = diction)
 
 
 def search(request):

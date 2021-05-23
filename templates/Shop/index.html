@@ -51,7 +51,7 @@
         {% csrf_token %}
         <button class="roundbtn" >Add to Cart</button>
         </form>
-        <span><a href="#" class="btn btn-primary ">View Product</a></span>
+        <span><a href="{% url 'productview' product.id %}" class="btn btn-primary ">View Product</a></span>
 
         </div>
 
