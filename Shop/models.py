@@ -37,6 +37,7 @@ class Checkout(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     location = models.TextField()
     phone = models.CharField(max_length=50)
+    total = models.IntegerField()
     placed =models.BooleanField(default=False)
     shipped =models.BooleanField(default=False)
     # def __str__(self):

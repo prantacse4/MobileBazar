@@ -54,7 +54,10 @@ def checkout(request):
         user = request.user
         location = request.POST['location']
         phone = request.POST['phone']
-        addData = Checkout(user=request.user, location=location, phone=phone)
+        total = 0
+        for cart in carts:
+            total = total+cart.quantity*cart.price
+        addData = Checkout(user=request.user, location=location, phone=phone, total = total)
         addData.save()
         obj = Checkout.objects.latest('id')
         for cart in carts:
@@ -105,6 +108,12 @@ def editqtycart(request, id):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+
+def mycheckout(request):
+    checkouts = Checkout.objects.all().order_by('id')
+    orders = Ordered.objects.all().order_by('id')
+    diction ={'checkouts':checkouts, 'orders':orders}
+    return render(request, 'Shop/mycheckout.html', context=diction)
 
 def brands(request):
     brands = Brand.objects.all()

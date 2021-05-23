@@ -23,7 +23,7 @@ class FormEditQty(forms.ModelForm):
 class FormCheckout(forms.ModelForm):
     class Meta:
         model = Checkout
-        fields = ['user', 'location', 'phone']
+        fields = ['user', 'location', 'phone', 'total']
 
 
 class FormOrdered(forms.ModelForm):
