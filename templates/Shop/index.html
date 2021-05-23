@@ -10,12 +10,31 @@
 {% endblock extracss %}
   
 
+
+
+
+{% block cart %}
+{% if cart != 0 %}
+<span class="badge badge-primary">{{ cart }}</span>
+{% endif %}
+{% endblock cart %}
+  
+
+
+
+
 {% block main %}
 
 <div class="container">
-  
-
   <div class="row">
+
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %} 
+</ul>
+{% endif %}
   {% for product in products %}
 
     <div class="col-md-4">
@@ -30,7 +49,7 @@
         <h4>Name: {{ product.name }}</h4>
         <form action="{% url 'addtocart' product.id %}" method="post">
         {% csrf_token %}
-        <button class="roundbtn">Add to Cart</button>
+        <button class="roundbtn" >Add to Cart</button>
         </form>
         <span><a href="#" class="btn btn-primary ">View Product</a></span>
 
@@ -38,6 +57,9 @@
 
     </div>
   {% endfor %}
+
+
+
 
   </div>
     

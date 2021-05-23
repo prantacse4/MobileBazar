@@ -52,26 +52,25 @@
                 ">
               <a class="nav-link" href="#">Brands</a>
             </li>
+            
+           
             <li class="nav-item 
-            {% block unofficialactive %}
+            {% block cartactive %}
                 
-            {% endblock unofficialactive %}
+            {% endblock cartactive %}
                 ">
-              <a class="nav-link" href="#">Unofficial</a>
+              <a class="nav-link" href="#">Cart 
+              {% block cart %}
+                
+              {% endblock cart %}
+                </a>
             </li>
             <li class="nav-item 
             {% block contactusactive %}
                 
             {% endblock contactusactive %}
                 ">
-              <a class="nav-link" href="#">Contact Us</a>
-            </li>
-            <li class="nav-item 
-            {% block cartactive %}
-                
-            {% endblock cartactive %}
-                ">
-              <a class="nav-link" href="#">Cart</a>
+              <a class="nav-link" href="#">About</a>
             </li>
             <li class="nav-item 
             {% block loginactive %}

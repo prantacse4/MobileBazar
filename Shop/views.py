@@ -13,7 +13,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
     products = Product.objects.all()
-    diction = {'products':products}
+    cart =Cart.objects.all().count()
+    diction = {'products':products, 'cart':cart}
     return render(request, 'Shop/index.html', context = diction)
 
 def wrong(request):
@@ -102,3 +103,25 @@ def editqtycart(request, id):
             else:
                 messages.success(request, 'Qty Can no be Updated')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
+def brands(request):
+    brands = Brand.objects.all()
+    cart =Cart.objects.all().count()
+    diction = {'brands':brands, 'cart':cart}
+    return render(request, 'Shop/brands.html', context = diction)
+
+
+
+def brandview(request,id):
+    brands = Brand.objects.get(pk=id)
+    cart =Cart.objects.all().count()
+    diction = {'brands':brands, 'cart':cart}
+    return render(request, 'Shop/brandview.html', context = diction)
+
+
+def search(request):
+    cart = Cart.objects.all().count()
+    diction = { 'cart':cart}
+    return render(request, 'Shop/search.html', context = diction)

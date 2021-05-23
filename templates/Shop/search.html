@@ -1,0 +1,26 @@
+{% extends 'Shop/base.html' %}
+
+{% block title %}
+  Search
+{% endblock title %}
+  
+
+{% block extracss %}
+  
+{% endblock extracss %}
+{% block cart %}
+{% if cart != 0 %}
+<span class="badge badge-primary">{{ cart }}</span>
+{% endif %}
+{% endblock cart %}
+  
+
+{% block main %}
+    <h1>Search Result</h1>
+{% endblock main %}
+
+
+{% block extrajs %}
+  
+{% endblock extrajs %}
+  
