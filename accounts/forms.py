@@ -9,12 +9,13 @@ from django.core import validators
 
 
 class ProfileForm(forms.ModelForm):
+    name = forms.CharField(required=False)
     location = forms.CharField(required=False)
     phone = forms.CharField(required=False)
     image = forms.ImageField( required=False)
     class Meta:
         model = Profile
-        fields = ['location','phone', 'image']
+        fields = ['name', 'location','phone', 'image']
 
 
 
@@ -23,7 +24,7 @@ class ProfileForm(forms.ModelForm):
 class UserCreationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2']
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
