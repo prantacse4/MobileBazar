@@ -44,7 +44,8 @@ def cart(request):
     total = 0
     for cart in carts:
         total = total+cart.quantity*cart.price
-    diction = {'carts':carts, 'total':total}
+    cart =Cart.objects.all().count()
+    diction = {'carts':carts, 'total':total, 'cart':cart}
     return render(request, 'Shop/cart.html', context = diction)
 
 @login_required(login_url='loginpage')
@@ -134,10 +135,11 @@ def editqtycart(request, id):
 def mycheckout(request):
     checkouts = Checkout.objects.all().order_by('id')
     checkoutscount =checkouts.count()
+    cart =Cart.objects.all().count()
     if(checkoutscount==0):
         return redirect('cart')
     orders = Ordered.objects.all().order_by('id')
-    diction ={'checkouts':checkouts, 'orders':orders}
+    diction ={'checkouts':checkouts, 'orders':orders, 'cart':cart}
     return render(request, 'Shop/mycheckout.html', context=diction)
 
 def brands(request):

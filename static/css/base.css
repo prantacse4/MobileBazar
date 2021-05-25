@@ -52,7 +52,7 @@ a{
 }
 
 img{
-    height: 100%;
+    height: fit-content;
     width: 100%;
     object-fit: cover;
     object-position: center;
@@ -135,3 +135,35 @@ button:focus{
     transition: all ease .4s;
 }
 
+
+
+.pro_image img {
+    height: 21rem;
+    border-radius: .5rem;
+    object-fit: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product{
+    background: var(--middark);
+    background: var(--middark);
+    border: 1px solid var(--hover);
+    padding: 1rem !important;
+    border-radius: .5rem;
+    height: 35rem;
+}
+.product:hover{
+    background: var(--litedark);
+}
+.product h4{
+    padding: .8rem 0rem;
+    font-size: 1.3rem;
+    color:var(--viewcolor);
+}
+.productbtn {
+    margin: .5rem 0rem;
+    padding: 0.5rem 1.8rem;
+    font-size: 1.1rem;
+    font-weight: 400;
+}

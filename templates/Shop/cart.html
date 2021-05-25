@@ -9,6 +9,10 @@
   
 {% endblock extracss %}
 
+{% block cartactive %}
+active                
+{% endblock cartactive %}
+
 
 {% block cart %}
 {% if cart != 0 %}
@@ -18,15 +22,23 @@
 
 
 
+
+{% block message %}
+{% if messages %}
+{% for message in messages %}
+<h4>{{ message }}</h4>
+{% endfor %} 
+{% endif %}
+{% endblock message %}
+  
+
+
+
+
+
 {% block main %}
 <div class="container">
-  {% if messages %}
-  <ul class="messages">
-      {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-      {% endfor %} 
-  </ul>
-  {% endif %}
+
   
     {% for cart in carts %}
     <hr>

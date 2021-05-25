@@ -1,0 +1,49 @@
+.mynav{
+    background: var(--middark) !important;
+    padding: 1rem 3rem;
+    border-top: .2rem solid var(--viewcolor);
+}
+.margin-top1rem{
+    margin: 2rem !important;
+}
+.mybtn{
+    color: var(--inactive);
+    background: var(--litedark);
+    border: 1px solid var(--inactive);
+}
+.mybtn:hover{
+    background: var(--hover) !important;
+    border: 1px solid var(--fontcolor);
+    transition: all ease .4s;
+}
+.myinput{
+    background: var(--litedark);
+    color: var(--inactive) !important;
+    border: 1px solid var(--inactive);
+}
+.myinput:focus{
+    color: var(--fontcolor) !important;
+    background: var(--middark) !important;
+    outline: none !important;
+    border: 1px solid var(--fontcolor);
+}
+
+.notification{
+    
+}
+.notification:hover{
+    background: var(--middark);
+}
+.notification h4 {
+    font-size: 1.2rem;
+    background: var(--litedark);
+    width: fit-content;
+    padding: .5rem 1.5rem;
+    border-radius: .3rem;
+    cursor: context-menu;
+    position: fixed;
+    z-index: 111111;
+    bottom: 1rem;
+    right: 1rem;
+    color: var(--viewcolor);
+}

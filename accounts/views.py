@@ -84,14 +84,14 @@ def signuppage(request):
 def profile(request):
     user = request.user
     user = User.objects.get(pk=user.id)
-    profile = Profile.objects.get(user=request.user)
-    diction = {}
+    profile = Profile.objects.filter(user=request.user)
+    diction = {'profile':profile, 'user':user }
     return render(request, 'Shop/profile.html', context = diction)
 
 @login_required(login_url='loginpage')
 def updateprofile(request):
     user = request.user
-    myprofile = Profile.objects.get(pk=user)
+    myprofile = Profile.objects.filter(pk=user)
     diction = {'myprofile':myprofile}
     return render(request, 'Shop/updateprofile.html', context = diction)
 

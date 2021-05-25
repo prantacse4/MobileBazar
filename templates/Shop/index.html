@@ -6,10 +6,11 @@
   
 
 {% block extracss %}
-  
 {% endblock extracss %}
   
-
+{% block homeactive %}
+active                
+{% endblock homeactive %}
 
 
 
@@ -22,37 +23,41 @@
 
 
 
+{% block message %}
+{% if messages %}
+{% for message in messages %}
+<h4>{{ message }}</h4>
+{% endfor %} 
+{% endif %}
+{% endblock message %}
+  
+
+
 
 {% block main %}
-
 <div class="container">
   <div class="row">
 
-    {% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %} 
-</ul>
-{% endif %}
   {% for product in products %}
 
-    <div class="col-md-4">
-        
-        <div class="p-2">
-          {% if product.product_photo %}
+    <div class="col-md-4 col-sm-12 mt-3">
+        <div class="p-2 product text-center">
+
+
+        <div class="pro_image">
+        {% if product.product_photo %}
           <img src="{{ product.product_photo.url }}" alt="">
         {% else %}
         <img src="{% static 'image/icon.jpg' %}" alt="">
-
         {% endif %}
-        <h4>Name: {{ product.name }}</h4>
+        </div>
+        
+        <h4>{{ product.name }}</h4>
         <form action="{% url 'addtocart' product.id %}" method="post">
         {% csrf_token %}
-        <button class="roundbtn" >Add to Cart</button>
+        <button class="text-center btn btn-info mybtn productbtn" >Add to Cart</button>
         </form>
-        <span><a href="{% url 'productview' product.id %}" class="btn btn-primary ">View Product</a></span>
-
+        <span><a href="{% url 'productview' product.id %}" class="btn btn-info productbtn">View Product</a></span>
         </div>
 
     </div>

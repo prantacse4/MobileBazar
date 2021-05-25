@@ -9,6 +9,11 @@
   
 {% endblock extracss %}
 
+{% block profileactive %}
+active                
+{% endblock profileactive %}
+
+
 {% block cart %}
 {% if cart != 0 %}
 <span class="badge badge-primary">{{ cart }}</span>
@@ -21,6 +26,7 @@
 {% block main %}
     <h1>Profile</h1>
     <a class="btn btn-primary" href="{% url 'logoutuser' %}">Logout</a>
+    <a class="btn btn-info" href="{% url 'updateprofile' %}">Update Profile</a>
     <form action="{% url 'delete_my_account' %}" method="POST" class="d-inline">
       {% csrf_token %}
       <button class="btn btn-danger">Delete My Account</button>
