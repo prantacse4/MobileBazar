@@ -1,13 +1,15 @@
 from django.shortcuts import render
 from django.shortcuts import render, HttpResponseRedirect
 from .models import *
-from .forms import FormProduct, FormCart, FormEditQty, FormCheckout, FormOrdered
+from .forms import FormProduct, FormCart, FormEditQty, FormCheckout, FormOrdered,FormProStock
 from django.db.models import Q
 from django.shortcuts import redirect
 from  django.contrib import messages
 from django.db.models import Count
 from django.db.models import Sum
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -21,6 +23,8 @@ def wrong(request):
     diction = {}
     return render(request, 'Shop/wrong.html', context = diction)
 
+
+@login_required(login_url='loginpage')
 def addproduct(request):
     brand = Brand.objects.all()
     myform = FormProduct()
@@ -34,7 +38,7 @@ def addproduct(request):
     return render(request, 'Shop/panel/addproduct.html', context = diction)
 
 
-
+@login_required(login_url='loginpage')
 def cart(request):
     carts = Cart.objects.all()
     total = 0
@@ -43,9 +47,10 @@ def cart(request):
     diction = {'carts':carts, 'total':total}
     return render(request, 'Shop/cart.html', context = diction)
 
-
+@login_required(login_url='loginpage')
 def checkout(request):
     carts = Cart.objects.all()
+    products = Product.objects.all()
     cartcount =carts.count()
     if(cartcount==0):
         return redirect('cart')
@@ -57,15 +62,25 @@ def checkout(request):
         total = 0
         for cart in carts:
             total = total+cart.quantity*cart.price
+            cartproductstock = cart.product.stock
+            inspro = Product.objects.get(pk=cart.product.id)
+            cartstock  = cart.quantity
+            if cartstock > cartproductstock:
+                messages.error(request, 'Stock not available in '+cart.product.name)
+                return redirect('cart')
+            else:
+                newStockProduct = cart.product.stock - cart.quantity
+                Product.objects.filter(pk=cart.product.id).update(stock=newStockProduct)
+                
         addData = Checkout(user=request.user, location=location, phone=phone, total = total)
         addData.save()
         obj = Checkout.objects.latest('id')
         for cart in carts:
             add = Ordered(checkout=obj, product=cart.product, price=cart.price, quantity=cart.quantity)
             add.save()
-        Cart.objects.all().delete()
+        Cart.objects.filter(user=request.user).delete()
         messages.success(request, 'Checkout Done')
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        return redirect('checkoutthanks')
    
     else:
         myform = FormCheckout()
@@ -74,6 +89,7 @@ def checkout(request):
 
 
 
+@login_required(login_url='loginpage')
 def addtocart(request, id):
     if request.method=="POST":
         myform = FormCart(request.POST)
@@ -86,6 +102,8 @@ def addtocart(request, id):
     
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+
+@login_required(login_url='loginpage')
 def deletethiscart(request, id):
     if request.method=="POST":
         delete_id = Cart.objects.get(pk=id)
@@ -94,6 +112,8 @@ def deletethiscart(request, id):
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+
+@login_required(login_url='loginpage')
 def editqtycart(request, id):
     if request.method=="POST":
         cartData = Cart.objects.get(pk=id)
@@ -109,6 +129,8 @@ def editqtycart(request, id):
 
 
 
+
+@login_required(login_url='loginpage')
 def mycheckout(request):
     checkouts = Checkout.objects.all().order_by('id')
     checkoutscount =checkouts.count()
@@ -141,6 +163,16 @@ def productview(request,id):
 
 
 def search(request):
+    givenSearch = request.GET['search']
+    results = Product.objects.filter( Q(name__icontains = givenSearch ) | Q(brand__brand__icontains = givenSearch ) | Q(code__icontains = givenSearch ) | Q(network__icontains = givenSearch ) | Q(display_details__icontains = givenSearch ) | Q(camera_details__icontains = givenSearch ) | Q(memory_details__icontains = givenSearch ) | Q(battery_details__icontains = givenSearch))
+    searchCount = results.count()
     cart = Cart.objects.all().count()
-    diction = { 'cart':cart}
+    diction = { 'cart':cart, 'givenSearch':givenSearch, 'results':results, 'searchCount':searchCount}
     return render(request, 'Shop/search.html', context = diction)
+
+
+@login_required(login_url='loginpage')
+def checkoutthanks(request):
+    cart =Cart.objects.all().count()
+    diction = {'cart':cart}
+    return render(request, 'Shop/checkoutthanks.html', context = diction)

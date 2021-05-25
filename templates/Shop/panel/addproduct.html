@@ -3,75 +3,74 @@
 
 {% block main %}
 <br><br>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <!-- {{ myform.as_p }} -->
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- {{ myform.as_p }} -->
 
 
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %} 
-</ul>
-{% endif %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
 
-        {% if myform.errors %}
+    {% if myform.errors %}
     {% for field in myform %}
-        {% for error in field.errors %}
-            
-            {% if "Name" == field.label %}
-            <div class="alert alert-danger">
-                <strong>{{ field.label }} -> {{ error|escape }}</strong>
-            </div>
-            {% endif %}
-                
-            
-                
-        {% endfor %}
+    {% for error in field.errors %}
+
+    {% if "Name" == field.label %}
+    <div class="alert alert-danger">
+        <strong>{{ field.label }} -> {{ error|escape }}</strong>
+    </div>
+    {% endif %}
+
+
+
+    {% endfor %}
     {% endfor %}
     {% for error in myform.non_field_errors %}
-        <div class="alert alert-danger">
-            <strong>{{ error|escape }}</strong>
-        </div>
-    {% endfor %} 
-{% endif %}
+    <div class="alert alert-danger">
+        <strong>{{ error|escape }}</strong>
+    </div>
+    {% endfor %}
+    {% endif %}
 
 
-{% if myform.errors.name %}
-<div class="alert alert-danger">
-    <strong>{{myform.errors.name|escape}}</strong>
-</div>
-                    <div class="alert alert-danger">
-                        <h5 class="my_alert_danger">{{myform.errors.name}}</h5>
-                    </div>
-            {% endif %}
-            
+    {% if myform.errors.name %}
+    <div class="alert alert-danger">
+        <strong>{{myform.errors.name|escape}}</strong>
+    </div>
+    <div class="alert alert-danger">
+        <h5 class="my_alert_danger">{{myform.errors.name}}</h5>
+    </div>
+    {% endif %}
 
-{% if "Name" == field.label %}
-            <div class="alert alert-danger">
-                <strong>{{ field.label }} -> {{ field.errors|escape }}</strong>
-            </div>
-            {% endif %}
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Name" name="name">
-            <input type="text" class="form-control" placeholder="Code" name="code">
-            <select name="brand" class="form-control">
-                {% for brands in brand %}
-                <option value={{brands.id}} >{{brands.brand}}</option>
-                {% endfor %}
-            </select> 
-            <input type="number" class="form-control" placeholder="stock" name="stock">
-            <input type="number" class="form-control" placeholder="price" name="price">
-            <input type="text" class="form-control" placeholder="network" name="network">
-            <input type="text" class="form-control" placeholder="display_details" name="display_details">
-            <input type="text" class="form-control" placeholder="camera_details" name="camera_details">
-            <input type="text" class="form-control" placeholder="memory_details" name="memory_details">
-            <input type="text" class="form-control" placeholder="battery_details" name="battery_details">
-            <input type="file" class="form-control-file" placeholder="product_photo" name="product_photo">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="reset" class="btn btn-warning">Reset</button>
-    </form>
+
+    {% if "Name" == field.label %}
+    <div class="alert alert-danger">
+        <strong>{{ field.label }} -> {{ field.errors|escape }}</strong>
+    </div>
+    {% endif %}
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Name" name="name">
+        <input type="text" class="form-control" placeholder="Code" name="code">
+        <select name="brand" class="form-control">
+            {% for brands in brand %}
+            <option value={{brands.id}}>{{brands.brand}}</option>
+            {% endfor %}
+        </select>
+        <input type="number" class="form-control" placeholder="stock" name="stock">
+        <input type="number" class="form-control" placeholder="price" name="price">
+        <input type="text" class="form-control" placeholder="network" name="network">
+        <input type="text" class="form-control" placeholder="display_details" name="display_details">
+        <input type="text" class="form-control" placeholder="camera_details" name="camera_details">
+        <input type="text" class="form-control" placeholder="memory_details" name="memory_details">
+        <input type="text" class="form-control" placeholder="battery_details" name="battery_details">
+        <input type="file" class="form-control-file" placeholder="product_photo" name="product_photo">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="reset" class="btn btn-warning">Reset</button>
+</form>
 {% endblock main %}
-    

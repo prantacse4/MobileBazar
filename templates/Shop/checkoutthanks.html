@@ -1,0 +1,44 @@
+{% extends 'Shop/base.html' %}
+
+{% block title %}
+  Congratulations!
+{% endblock title %}
+  
+
+{% block extracss %}
+  
+{% endblock extracss %}
+
+
+{% block cart %}
+{% if cart != 0 %}
+<span class="badge badge-primary">{{ cart }}</span>
+{% endif %}
+{% endblock cart %}
+
+{% block main %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %} 
+</ul>
+{% endif %}
+<div class="container">
+    <div class="card bg-dark text-white">
+        <div class="p-4">
+            <h1>Congratulations! Your order is successful. Now You can Checkout More details from your profile</h1>
+            <a href="{% url 'index' %}" class="btn btn-primary">Index</a>
+            <a href="{% url 'profile' %}" class="btn btn-info">Profile</a>
+        </div>
+    
+    </div>
+</div>
+
+{% endblock main %}
+
+
+{% block extrajs %}
+  
+{% endblock extrajs %}
+  

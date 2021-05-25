@@ -11,7 +11,32 @@
   
 
 {% block main %}
-<h1>Login</h1>
+<div class="container">
+
+
+  
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %} 
+</ul>
+{% endif %}
+
+  <br>
+  <h1>Login</h1>
+  <form method="POST">
+    {% csrf_token %}
+    <label  class="form-control-label mt-3">Email Or Username</label>
+    <input type="text" class="form-control" name="username">
+
+    <label  class="form-control-label mt-3">Password</label>
+    <input type="password" class="form-control" name="password">
+
+
+    <button class="mt-4 btn btn-primary">Login</button>
+  </form>
+</div>
 {% endblock main %}
 
 

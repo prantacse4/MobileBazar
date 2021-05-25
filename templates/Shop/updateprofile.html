@@ -19,7 +19,41 @@
 
 
 {% block main %}
-    <h1>Update Profile</h1>
+<br><br><br>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %} 
+</ul>
+{% endif %}
+
+{% if myform.errors.phone %}
+<div class="alert alert-danger">
+    <strong>{{myform.errors.phone|escape}}</strong>
+</div>
+<div class="alert alert-danger">
+    <h5 class="my_alert_danger">{{myform.errors.phone}}</h5>
+</div>
+{% endif %}
+<div class="container">
+  <form action="{% url 'updateprofiledetails' %}" method="POST" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <input type="text" value="{{ myprofile.phone }}" name="phone">
+    <input type="text" value="{{ myprofile.location }}" name="location">
+    
+    {% if myprofile.image %}
+      <img src="{{ myprofile.image.url }}" alt="">
+    {% endif %}
+    <input type="file" name="image">
+      
+    <button class="btn btn-primary">Update</button>
+  </form>
+</div>
+
+
+
 {% endblock main %}
 
 

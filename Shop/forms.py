@@ -30,3 +30,9 @@ class FormOrdered(forms.ModelForm):
     class Meta:
         model = Ordered
         fields = ['checkout', 'product', 'price', 'quantity']
+
+
+class FormProStock(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['stock']

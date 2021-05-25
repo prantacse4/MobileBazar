@@ -13,4 +13,8 @@ urlpatterns = [
     path('editqtycart/<int:id>/', views.editqtycart, name='editqtycart'),
     path('deletethiscart/<int:id>/', views.deletethiscart, name='deletethiscart'),
     path('panel/addproduct/', views.addproduct, name='addproduct'),
+    path('checkoutthanks/', views.checkoutthanks, name='checkoutthanks'),
+
+
+
 ]

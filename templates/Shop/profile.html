@@ -20,6 +20,11 @@
 
 {% block main %}
     <h1>Profile</h1>
+    <a class="btn btn-primary" href="{% url 'logoutuser' %}">Logout</a>
+    <form action="{% url 'delete_my_account' %}" method="POST" class="d-inline">
+      {% csrf_token %}
+      <button class="btn btn-danger">Delete My Account</button>
+  </form>
 {% endblock main %}
 
 
