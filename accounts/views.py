@@ -82,6 +82,9 @@ def signuppage(request):
 
 @login_required(login_url='loginpage')
 def profile(request):
+    user = request.user
+    user = User.objects.get(pk=user.id)
+    profile = Profile.objects.get(user=request.user)
     diction = {}
     return render(request, 'Shop/profile.html', context = diction)
 
@@ -135,8 +138,12 @@ def delete_my_account(request):
         profile = Profile.objects.filter(user=request.user)
         Cart.objects.filter(user=request.user).delete()
         checkouts = Checkout.objects.filter(user=request.user)
-        Ordered.objects.filter(checkout=checkouts).delete()
-        Checkout.objects.filter(user=request.user).delete()
+        for checkout in checkouts:
+            Ordered.objects.filter(checkout = checkout).delete()
+
+        for checkout in checkouts:
+            Checkout.objects.filter(user = request.user).delete()
+        
         profile.delete()
         del_id.delete()
         logout(request)
