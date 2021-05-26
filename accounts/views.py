@@ -85,6 +85,8 @@ def profile(request):
     user = request.user
     user = User.objects.get(pk=user.id)
     profile = Profile.objects.filter(user=request.user)
+    if profile:
+        profile = Profile.objects.get(pk=user)
     diction = {'profile':profile, 'user':user }
     return render(request, 'Shop/profile.html', context = diction)
 
@@ -92,7 +94,10 @@ def profile(request):
 def updateprofile(request):
     user = request.user
     myprofile = Profile.objects.filter(pk=user)
-    diction = {'myprofile':myprofile}
+    if myprofile:
+        myprofile = Profile.objects.get(pk=user)
+
+    diction = {'profile':myprofile}
     return render(request, 'Shop/updateprofile.html', context = diction)
 
 

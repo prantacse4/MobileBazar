@@ -54,7 +54,7 @@ active
         </div>
     {% endfor %} 
 {% endif %}
-    <div class="card bg-dark">
+    <div class="card bg-dark mynav">
         <div class="card-header d-flex flex-row justify-content-between"><h2>Checkout</h2><a href="{% url 'cart' %}" class="btn btn-outline-info">Back to Cart</a></div>
         <div class="card-body">
             <form method="post">
@@ -63,7 +63,7 @@ active
                 <textarea name="location" class="form-control bg-dark text-white" placeholder="Write you address"  rows="3"></textarea>
                 <label class="form-control-label mt-3">Phone</label>
                 <input type="text" class="form-control bg-dark text-white" name="phone">
-                <button class="btn btn-success mt-3">Checkout</button>
+                <button class="btn btn-info mt-3">Checkout</button>
             </form>
         </div>
     </div>

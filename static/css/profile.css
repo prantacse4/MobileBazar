@@ -1,0 +1,20 @@
+
+.profile_details {
+    padding: 1rem;
+    border: 1px solid var(--viewcolor);
+    border-radius: .3rem;
+    margin: .8rem;
+}
+.profile_details h5{
+    padding-top: .5rem;
+}
+.profile_picture{
+    padding: 1rem;
+    border: 1px solid var(--viewcolor);
+    border-radius: .3rem;
+    margin: .8rem;
+}
+.profile_picture img {
+    height: 15rem;
+    object-fit: contain;
+}

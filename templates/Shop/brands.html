@@ -28,13 +28,16 @@ active
     <div class="container">
       
       {% for brand in brands %}
-      <a href="{% url 'brandview' brand.id %}">
-        <div class="card card-body bg-dark text-white btn m-4 p-3">
+      <a href="{% url 'brandview' brand.id %}" class="">
+        <div class="card card-body bg-dark text-white btn m-4 p-3 mynav hover">
           <h1 class="text-center">{{ brand.brand }}</h1>
         </div>
       </a>
       {% endfor %}
-        
+        <br><br>
+        <a href="{% url 'index' %}" class="m-4 p-3 btn btn-primary text-center mybtn productbtn">Back to Home</a>
+
+        <br><br>
     </div>
 {% endblock main %}
 

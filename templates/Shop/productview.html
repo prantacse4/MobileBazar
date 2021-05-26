@@ -1,13 +1,22 @@
 {% extends 'Shop/base.html' %}
-
+{% load static %}
 {% block title %}
   ProductViewer
 {% endblock title %}
   
 
 {% block extracss %}
-  
+  <link rel="stylesheet" href="{% static 'css/products.css' %}">
 {% endblock extracss %}
+
+{% block message %}
+{% if messages %}
+{% for message in messages %}
+<h4>{{ message }}</h4>
+{% endfor %} 
+{% endif %}
+{% endblock message %}
+
 
 {% block cart %}
 {% if cart != 0 %}
@@ -24,39 +33,39 @@
 
 <div class="container">
     <br><br>
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %} 
-    </ul>
-    {% endif %}
 
-    <div class="card bg-dark text-white">
+    <div class="card bg-dark text-white mynav">
         <div class="card-header">
-            <h3>{{ product.name }}</h3>
+            <h3 class="text-center">{{ product.name }}</h3>
         </div>
         <div class="card-body">
-            <img src="{{ product.product_photo.url }}" >
+            <div class="viewer_image mb-3 pb-4">
+                <img src="{{ product.product_photo.url }}" >
+            </div>
 
-            <h2>{{ product.code }}</h2>
-            <h2>{{ product.stock }}</h2>
-            <h2>{{ product.price }}</h2>
-            <h2>{{ product.brand.brand }}</h2>
-            <h2>{{ product.network }}</h2>
-            <p class="w-25">{{ product.display_details|linebreaks }}</p>
-            <p class="w-25">{{ product.camera_details|linebreaks }}</p>
-            <p class="w-25">{{ product.memory_details|linebreaks }}</p>
-            <p class="w-25">{{ product.battery_details|linebreaks }}</p>
+
+            <form action="{% url 'addtocart' product.id %}" class="text-center m-3" method="post">
+                {% csrf_token %}
+                <button class="btn btn-primary text-center mybtn productbtn" >Add to Cart</button>
+            </form>
+            <h5><b>Price :: {{ product.price }} /=Taka</b></h5><hr>
+            <p><b>Company :: </b>{{ product.brand.brand }}</p><hr>
+            <p><b>Produdct Code ::</b> {{ product.code }}</p><hr>
+            <p><b>Available :: </b>{{ product.stock }} Piece</p><hr>
+            <p><b>Network :: </b>{{ product.network }}</p><hr>
+            <hr>
+            <p class="w-25"><b>Display ::</b> {{ product.display_details|linebreaks }}</p><hr>
+            <p class="w-25"><b>Camera ::</b>{{ product.camera_details|linebreaks }}</p><hr>
+            <p class="w-25"><b>Speed ::</b>{{ product.memory_details|linebreaks }}</p><hr>
+            <p class="w-25"><b>Battery ::</b>{{ product.battery_details|linebreaks }}</p><hr>
         </div>
 
         <br>
-        <form action="{% url 'addtocart' product.id %}" method="post">
-            {% csrf_token %}
-            <button class="roundbtn" >Add to Cart</button>
-        </form>
+        <a href="{% url 'index' %}" class="btn btn-primary text-center mybtn productbtn">Back to Home</a>
+        
     </div>
 </div>
+<br><br>
 
 
 

@@ -1,12 +1,12 @@
 {% extends 'Shop/base.html' %}
-
+{% load static %}
 {% block title %}
   Home
 {% endblock title %}
   
 
 {% block extracss %}
-  
+  <link rel="stylesheet" href="{% static 'css/products.css' %}">
 {% endblock extracss %}
 {% block checkoutsactive %}
 active                
@@ -22,25 +22,30 @@ active
 
 
 <div class="container">
-  
+  <hr><br>
+  <div class="card card-header mynav text-center"><h4>My Orders</h4></div><hr>
     
   {% for checkout in checkouts %}
-  
-  <div class="card bg-dark text-white mt-3 mb-3">
+
+  <div class="card bg-dark text-white mt-3 mb-3 mynav">
     <div class="card-body">
+      <h5 class="mycolor"><b>Order Details</b></h5>
       <p>Location: {{ checkout.location }}</p>
       <p>Phone: {{ checkout.phone }}</p>
       <p>Placed: {{ checkout.placed }}</p>
       <p>Shipped: {{ checkout.shipped }}</p>
       <p>Total: {{ checkout.total }}</p>
       <hr>
-      <b>Orders</b>
+      <b class="mycolor">Orders</b>
       
       {% for order in orders %}
       {% if checkout == order.checkout %}
-        <p>{{order.product.name}}</p>
-        <p>{{ order.quantity }}</p>
-        <p>{{ order.price }}</p>
+        <div class="orders mt-2">
+        <p>Product :: {{order.product.name}}</p>
+        <p>Company :: {{order.product.brand.brand}}</p>
+        <p>Quantity :: {{ order.quantity }} Piece</p>
+        <p>Price per Product :: {{ order.price }} Taka</p>
+        </div>
       {% endif %}
         
 

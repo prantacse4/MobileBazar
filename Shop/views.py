@@ -136,8 +136,7 @@ def mycheckout(request):
     checkouts = Checkout.objects.all().order_by('id')
     checkoutscount =checkouts.count()
     cart =Cart.objects.all().count()
-    if(checkoutscount==0):
-        return redirect('cart')
+
     orders = Ordered.objects.all().order_by('id')
     diction ={'checkouts':checkouts, 'orders':orders, 'cart':cart}
     return render(request, 'Shop/mycheckout.html', context=diction)

@@ -6,7 +6,7 @@
   
 
 {% block extracss %}
-  
+  <link rel="stylesheet" href="{% static 'css/products.css' %}">
 {% endblock extracss %}
 
 {% block brandsactive %}
@@ -40,8 +40,14 @@ active
 {% block main %}
 <br>
 <div class="container">
-  <button class="m-4 p-4 btn btn-info">{{ brand.brand }}</button>
-  <a href="{% url 'brands' %}">Back</a>
+
+<div class="rightside">
+  <button class="m-2 mt-4 p-2 btn btn-info">{{ brand.brand }}</button>
+  <a href="{% url 'brands' %}" class="btn btn-primary mt-3 mybtn p-2">Back</a>
+
+</div>
+<br><br>
+
   <div class="row">
 
 
@@ -73,6 +79,7 @@ active
   {% endfor %}
   </div>
     
+  <br><br>
 </div>
 {% endblock main %}
 

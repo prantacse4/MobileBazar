@@ -1,0 +1,14 @@
+.viewer_image img{
+    height: 25rem;
+    object-fit: contain;
+
+}
+
+
+
+.orders {
+    border: 1px solid var(--viewcolor);
+    border-radius: .3rem;
+    padding: .5rem;
+    margin-top: .8rem;
+}

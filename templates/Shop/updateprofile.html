@@ -1,18 +1,25 @@
 {% extends 'Shop/base.html' %}
-
+{% load static %}
 {% block title %}
   Update|Profile
 {% endblock title %}
   
 
 {% block extracss %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
   
 {% endblock extracss %}
 
 {% block profileactive %}
 active                
 {% endblock profileactive %}
-
+{% block message %}
+{% if messages %}
+{% for message in messages %}
+<h4>{{ message }}</h4>
+{% endfor %} 
+{% endif %}
+{% endblock message %}
 
 
 {% block cart %}
@@ -25,40 +32,122 @@ active
 
 
 {% block main %}
+<div class="container">
+  <div class="rightside">
+    <a href="{% url 'profile' %}" class="m-2 mt-4 p-2 btn btn-info">Profile</button>
+    <a href="{% url 'profile' %}" class="btn btn-primary mt-3 mybtn p-2">Back</a>
+  
+  </div>
+
+
+</div>
 <br><br><br>
 
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %} 
-</ul>
-{% endif %}
 
-{% if myform.errors.phone %}
-<div class="alert alert-danger">
-    <strong>{{myform.errors.phone|escape}}</strong>
-</div>
-<div class="alert alert-danger">
-    <h5 class="my_alert_danger">{{myform.errors.phone}}</h5>
-</div>
-{% endif %}
+
 <div class="container">
+  <div class="mynav profile_tab">
+    <h4 class="text-center p-2 m-2 mb-4 mycolor">My Profile</h4>
+    <div class="row">
+      <div class="col-md-4 col sm-12">
+        <div class="profile_picture">
+          
+          {% if profile.image %}
+          <img src="{{ profile.image.url }}" alt="">
+          {% else %}
+          <img src="{% static 'image/none.png' %}" alt="">
+          {% endif %}
+            
+        </div>
+      </div>
+      <div class="col-md-8 col-sm-12">
+        <div class="profile_details">
+          
+          {% if profile.name %}
+            <h3 class="mt-3 mb-3 mycolor">{{ profile.name }}</h3><hr>
+          {% endif %}
+
+          {% if profile.location %}
+            <h5>Address :: {{ profile.location }}</h5>
+          {% endif %}
+
+          {% if profile.phone %}
+            <h5>Contact :: {{ profile.phone }}</h5>
+          {% endif %}
+
+          
+            
+        </div>
+      </div>
+    </div><hr><br>
+
+
+    <form action="{% url 'delete_my_account' %}" method="POST" class="d-inline">
+      {% csrf_token %}
+      <button class="btn btn-danger">Delete My Account</button>
+  </form>
+<br><br>
+
+
+
+  {% if myform.errors.phone %}
+  <div class="alert alert-danger">
+      <strong>{{myform.errors.phone|escape}}</strong>
+  </div>
+  <div class="alert alert-danger">
+      <h5 class="my_alert_danger">{{myform.errors.phone}}</h5>
+  </div>
+  {% endif %}
+
+
+
   <form action="{% url 'updateprofiledetails' %}" method="POST" enctype="multipart/form-data" >
     {% csrf_token %}
-    <input type="text" value="{{ myprofile.name }}" name="name">
 
-    <input type="text" value="{{ myprofile.phone }}" name="phone">
-    <input type="text" value="{{ myprofile.location }}" name="location">
+    <label class="mt-3 fonrm-control-label">Name</label>
+    <input type="text" class="form-control myinput" value="{{ profile.name }}" name="name" placeholder="Enter Your Name">
+
+    <label class="mt-3 fonrm-control-label">Phone</label>
+    <input type="text" class="form-control myinput"  value="{{ profile.phone }}" name="phone" placeholder="Enter Your Phone">
     
-    {% if myprofile.image %}
-      <img src="{{ myprofile.image.url }}" alt="">
-    {% endif %}
-    <input type="file" name="image">
-      
+    <label class="mt-3 fonrm-control-label">Location</label>
+    <input type="text" class="form-control myinput" value="{{ profile.location }}" name="location" placeholder="Enter Your Location">
+    
+    <label class="mt-3 fonrm-control-label">Profile Picture</label>
+    <input type="file" class="form-control-file " name="image">
+      <br>
     <button class="btn btn-primary">Update</button>
   </form>
+
+
+
+
+  <br><br>
+
+
+
+  </div>
 </div>
+
+
+
+
+<br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

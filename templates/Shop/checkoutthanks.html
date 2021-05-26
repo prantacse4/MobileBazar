@@ -21,18 +21,21 @@ active
 {% endif %}
 {% endblock cart %}
 
-{% block main %}
+{% block message %}
 {% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %} 
-</ul>
+{% for message in messages %}
+<h4>{{ message }}</h4>
+{% endfor %} 
 {% endif %}
+{% endblock message %}
+
+
+{% block main %}
+<br><br>
 <div class="container">
-    <div class="card bg-dark text-white">
+    <div class="card bg-dark text-white mycolor mynav">
         <div class="p-4">
-            <h1>Congratulations! Your order is successful. Now You can Checkout More details from your profile</h1>
+            <h4 class="mb-4">Congratulations! Your order is successful. Now You can Checkout More details from your profile</h1>
             <a href="{% url 'index' %}" class="btn btn-primary">Index</a>
             <a href="{% url 'profile' %}" class="btn btn-info">Profile</a>
         </div>

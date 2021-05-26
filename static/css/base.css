@@ -167,3 +167,28 @@ button:focus{
     font-size: 1.1rem;
     font-weight: 400;
 }
+.hover:hover{
+    background: var(--hover);
+}
+
+.myinput{
+    background: var(--litedark);
+    color: var(--inactive) !important;
+    border: 1px solid var(--inactive);
+}
+.myinput:focus{
+    color: var(--fontcolor) !important;
+    background: var(--middark) !important;
+    outline: none !important;
+    border: 1px solid var(--fontcolor);
+}
+.mycolor{
+    color: var(--viewcolor) !important;
+}
+
+.rightside{
+    position: fixed;
+    z-index: 111111;
+    top: 4rem;
+    right: 1rem;
+}
