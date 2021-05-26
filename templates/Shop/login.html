@@ -15,32 +15,37 @@ active
 
 {% endblock loginactive %}
 
+{% block message %}
+{% if messages %}
+{% for message in messages %}
+<h4>{{ message }}</h4>
+{% endfor %} 
+{% endif %}
+{% endblock message %}
+
+
 {% block main %}
 <div class="container">
 
 
   
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %} 
-</ul>
-{% endif %}
+
 
   <br>
-  <h1>Login</h1>
+  <div class="card card-body bg-dark text-white mynav">
+    <h1 class="text-center mycolor">Login</h1>
   <form method="POST">
     {% csrf_token %}
     <label  class="form-control-label mt-3">Email Or Username</label>
-    <input type="text" class="form-control" name="username">
+    <input type="text" class="form-control myinput" placeholder="Enter Username" name="username">
 
     <label  class="form-control-label mt-3">Password</label>
-    <input type="password" class="form-control" name="password">
+    <input type="password" class="form-control myinput" placeholder="**********" name="password">
 
 
-    <button class="mt-4 btn btn-primary">Login</button>
+    <button class="mt-4 btn btn-info">Login</button>
   </form>
+  </div>
 </div>
 {% endblock main %}
 

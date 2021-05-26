@@ -17,68 +17,56 @@ active
 
 {% block main %}
 
-{% if myform.errors.username %}
-<div class="alert alert-danger">
+<br><br>
+
+
+
+
+
+
+<div class="container">
+<div class="card card-body bg-dark text-white mynav">
+    <h1 class="text-center mycolor m-2 p-2">Signup</h1>
+    {% if myform.errors.username %}
+<div class="alert">
     <h5>{{myform.errors.username}}</h5>
 </div>
 {% endif %}
-
-
-
-
-  
-
-
 {% if myform.errors.email %}
-<div class="alert alert-danger">
+<div class="alert">
     <h5>Email Already registered</h5>
 </div>
 {% endif %}
-
-
-
-
 {% if myform.errors.password1 %}
-<div class="alert alert-danger">
+<div class="alert">
     <h5>{{myform.errors.password1}}</h5>
 </div>
 {% endif %}
-
-
-
 {% if myform.errors.password2 %}
-<div class="alert alert-danger">
+<div class="alert">
     <h5>{{myform.errors.password2}}</h5>
 </div>
 {% endif %}
-
-
-
-
-
-<h1>Signup</h1>
-<div class="container">
   <form method="POST">
     {% csrf_token %}
-<!-- {{ myform.as_p }} -->
-
 
     <label  class="form-control-label mt-3">Username</label>
-    <input type="text" class="form-control" name="username">
+    <input type="text" class="form-control myinput" placeholder="Enter Username" required name="username">
 
     <label  class="form-control-label mt-3">Email</label>
-    <input type="email" class="form-control" name="email">
+    <input type="email" class="form-control myinput" placeholder="Enter Email" required name="email">
 
 
 
     <label  class="form-control-label mt-3">Password</label>
-    <input type="password" class="form-control" name="password1">
+    <input type="password" class="form-control myinput" placeholder="**********" required name="password1">
 
     <label  class="form-control-label mt-3">Re-Password</label>
-    <input type="password" class="form-control" name="password2">
+    <input type="password" class="form-control myinput" placeholder="**********" required name="password2">
 
 
-    <button class="mt-4 btn btn-primary">Signup</button>
+    <button class="mt-4 btn btn-info">Signup</button>
+</div>
 </div>
 {% endblock main %}
 
