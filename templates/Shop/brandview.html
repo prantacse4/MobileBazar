@@ -51,6 +51,8 @@ active
   <div class="row">
 
 
+{% if products %}
+  
   {% for product in products %}
 
   <div class="col-md-4 col-sm-12 mt-3">
@@ -77,6 +79,11 @@ active
 
 
   {% endfor %}
+  {% else %}
+      <div class="card bg-dark p-3 text-center mycolor mynav mt-4 mb-4 w-100">
+        <h4>No Results Found</h4>
+      </div>
+      {% endif %}
   </div>
     
   <br><br>

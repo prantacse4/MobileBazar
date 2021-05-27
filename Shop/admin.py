@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Brand, Product, Cart, Checkout, Ordered
+from .models import Brand, Product, Cart, Checkout, Ordered, Slider
 
 # Register your models here.
 
@@ -23,3 +23,7 @@ class CheckoutAdmin(admin.ModelAdmin):
 @admin.register(Ordered)
 class OrderedAdmin(admin.ModelAdmin):
     list_display = ('id', 'checkout', 'product', 'price', 'quantity')
+
+@admin.register(Slider)
+class SliderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'image')

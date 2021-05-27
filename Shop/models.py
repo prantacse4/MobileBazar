@@ -48,3 +48,6 @@ class Ordered(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     price = models.IntegerField()
     quantity = models.IntegerField()
+
+class Slider(models.Model):
+    image = models.ImageField(upload_to="uploaded_image/sliders")

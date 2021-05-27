@@ -15,8 +15,9 @@ from django.contrib.auth.decorators import login_required
 
 def index(request):
     products = Product.objects.all()
+    sliders = Slider.objects.all()
     cart =Cart.objects.all().count()
-    diction = {'products':products, 'cart':cart}
+    diction = {'products':products, 'cart':cart, 'sliders':sliders}
     return render(request, 'Shop/index.html', context = diction)
 
 def wrong(request):

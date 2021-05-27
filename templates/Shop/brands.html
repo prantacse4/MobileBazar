@@ -27,6 +27,9 @@ active
     <br>
     <div class="container">
       
+      {% if brands %}
+        
+        
       {% for brand in brands %}
       <a href="{% url 'brandview' brand.id %}" class="">
         <div class="card card-body bg-dark text-white btn m-4 p-3 mynav hover">
@@ -34,6 +37,12 @@ active
         </div>
       </a>
       {% endfor %}
+      {% else %}
+      <div class="card bg-dark p-3 text-center mycolor mynav mt-4 mb-4 w-100">
+        <h4>No Results Found</h4>
+      </div>
+      {% endif %}
+
         <br><br>
         <a href="{% url 'index' %}" class="m-4 p-3 btn btn-primary text-center mybtn productbtn">Back to Home</a>
 
