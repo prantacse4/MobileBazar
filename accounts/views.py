@@ -122,6 +122,7 @@ def updateprofiledetails(request):
         if request.method=="POST":
             myform = ProfileForm(request.POST, request.FILES,)
             if myform.is_valid():
+                myform.user=request.user
                 myform.save(commit=True)
                 messages.success(request, 'Profile Details Created')
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
