@@ -73,7 +73,7 @@ def signuppage(request):
             if myform.is_valid():
                 myform.save(commit=True)
                 user = myform.cleaned_data.get('username')
-                messages.success(request, 'Account Created'+ user)
+                messages.success(request, 'Account Created for '+ user)
                 return redirect('loginpage')
 
         diction = {'myform':myform}
