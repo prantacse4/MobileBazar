@@ -25,15 +25,15 @@ def loginpage(request):
         if request.method == 'POST':
             username = request.POST.get('username')
             password = request.POST.get('password')
-            enteremail = User.objects.filter(username = username).count()
-            if enteremail > 0:
-                enteremail = User.objects.filter(email = username).count()
-                if enteremail > 0:
-                    enteremail = True
-                else:
-                    enteremail = False
-            else:
-                enteremail = False
+            # enteremail = User.objects.filter(username = username).count()
+            # if enteremail > 0:
+            #     enteremail = User.objects.filter(email = username).count()
+            #     if enteremail > 0:
+            #         enteremail = True
+            #     else:
+            #         enteremail = False
+            # else:
+            #     enteremail = False
 
             try:
                 user = authenticate(request, username=User.objects.get(email=username), password=password)
@@ -42,14 +42,8 @@ def loginpage(request):
                 user = authenticate(request, username=username, password=password)
 
             if user is not None:
-                if enteremail == True:
-                    is_what = User.objects.get(email=username)
-                else:
-                    is_what = User.objects.get(username=username)
-
-                is_superuser = is_what.is_superuser
                 login(request, user)
-                if is_superuser == True:
+                if request.user.is_superuser == True:
                     return HttpResponseRedirect('/admin')
                     
                 return redirect('index')
@@ -120,12 +114,12 @@ def updateprofiledetails(request):
 
     else:
         if request.method=="POST":
-            myform = ProfileForm(request.POST, request.FILES,)
+            myform = ProfileForm(request.POST, request.FILES)
+            myform.user = request.user
             if myform.is_valid():
-                myform.user=request.user
                 myform.save(commit=True)
                 messages.success(request, 'Profile Details Created')
-                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+                return redirect('updateprofile')
             else:
                 diction = {'myform':myform}
                 return render(request, 'Shop/updateprofile.html', context = diction)

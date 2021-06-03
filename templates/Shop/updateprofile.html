@@ -92,17 +92,43 @@ active
 
   {% if myform.errors.phone %}
   <div class="alert">
-      <strong>{{myform.errors.phone|escape}}</strong>
-  </div>
-  <div class="alert">
       <h5 class="my_alert_danger">{{myform.errors.phone}}</h5>
   </div>
   {% endif %}
 
 
+  {% if myform.errors.user %}
+  <div class="alert">
+      <h5 class="my_alert_danger">{{myform.errors.user}}</h5>
+  </div>
+  {% endif %}
+
+
+  {% if myform.errors.name %}
+  <div class="alert">
+      <h5 class="my_alert_danger">{{myform.errors.name}}</h5>
+  </div>
+  {% endif %}
+
+
+  {% if myform.errors.location %}
+  <div class="alert">
+      <h5 class="my_alert_danger">{{myform.errors.location}}</h5>
+  </div>
+  {% endif %}
+
+
+  
+  {% if myform.errors.image %}
+  <div class="alert">
+      <h5 class="my_alert_danger">{{myform.errors.image}}</h5>
+  </div>
+  {% endif %}
 
   <form action="{% url 'updateprofiledetails' %}" method="POST" enctype="multipart/form-data" >
     {% csrf_token %}
+
+    <input type="text" name="user" value="{{ request.user.id }}" class="d-none">
 
     <label class="mt-3 fonrm-control-label">Name</label>
     <input type="text" class="form-control myinput" value="{{ profile.name }}" name="name" placeholder="Enter Your Name">

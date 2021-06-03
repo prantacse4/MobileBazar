@@ -189,7 +189,7 @@ button:focus{
 .rightside{
     position: fixed;
     z-index: 111111;
-    top: 4rem;
+    top: 8rem;
     right: 1rem;
 }
 
